@@ -1,0 +1,15 @@
+* {
+font-family: arial, helvetica, sans-serif;
+color: #333;
+}
+
+body {
+	background-color: #eee;
+	font-family: arial, helvetica, sans-serif;
+}
+
+.center {
+	margin: 0% auto;
+	text-align: center;
+	vertical-align: middle;
+}
