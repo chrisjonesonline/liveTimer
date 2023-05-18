@@ -8,6 +8,16 @@ body {
 	font-family: arial, helvetica, sans-serif;
 }
 
+a, :visited, :before, :after {
+	text-decoration: none;
+	color: #2088e3;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+
 .center {
 	margin: 0% auto;
 	text-align: center;
