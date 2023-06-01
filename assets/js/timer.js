@@ -1,7 +1,7 @@
 /**************/
 /* Live Timer */
 /**************/
-var deadline = new Date("MAY 28, 2023 12:00:00").getTime();
+var deadline = new Date("JULY 4, 2023 12:00:00").getTime();
 
 var x = setInterval(function() {
 
