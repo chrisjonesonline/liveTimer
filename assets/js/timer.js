@@ -12,13 +12,8 @@ function setTimer() {
   var storedDeadline = localStorage.getItem("deadline");
   var storedElapsedTime = localStorage.getItem("elapsedTime");
 
-  if (storedDeadline) {
-    deadline = parseInt(storedDeadline, 10);
-    elapsedTime = parseInt(storedElapsedTime, 10);
-  } else {
-    deadline = inputDeadline;
-    elapsedTime = 0;
-  }
+  deadline = storedDeadline ? parseInt(storedDeadline, 10) : inputDeadline;
+  elapsedTime = storedElapsedTime ? parseInt(storedElapsedTime, 10) : 0;
 
   var currentTime = new Date().getTime();
   var timeElapsedSinceDeadline = currentTime - (deadline + elapsedTime);
@@ -39,17 +34,17 @@ function setTimer() {
     var hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((t % (1000 * 60)) / 1000);
-    document.getElementById("day").innerHTML = days;
-    document.getElementById("hour").innerHTML = hours;
-    document.getElementById("minute").innerHTML = minutes;
-    document.getElementById("second").innerHTML = seconds;
+    document.getElementById("day").textContent = days;
+    document.getElementById("hour").textContent = hours;
+    document.getElementById("minute").textContent = minutes;
+    document.getElementById("second").textContent = seconds;
     if (t < 0) {
       clearInterval(x);
       document.getElementById("demo").innerHTML = "<a href='https://www.w3schools.com/js/DEFAULT.asp' target='_blank'>COMPLETE</a>";
-      document.getElementById("day").innerHTML = '0';
-      document.getElementById("hour").innerHTML = '0';
-      document.getElementById("minute").innerHTML = '0';
-      document.getElementById("second").innerHTML = '0';
+      document.getElementById("day").textContent = '0';
+      document.getElementById("hour").textContent = '0';
+      document.getElementById("minute").textContent = '0';
+      document.getElementById("second").textContent = '0';
       localStorage.removeItem("deadline");
       localStorage.removeItem("elapsedTime");
     }
@@ -71,7 +66,5 @@ window.onload = function() {
     setTimer();
   }
   
-  document.getElementById("deadline").addEventListener("change", function() {
-    updateTimer();
-  });
-}
+  document.getElementById("deadline").addEventListener("change", updateTimer);
+};
