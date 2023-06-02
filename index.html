@@ -8,10 +8,18 @@
 <h1>Live Timer</h1>
 <hr />
 
-	<span class="days" id="day"></span> Days
-	<span class="hours" id="hour"></span> Hours
-	<span class="minutes" id="minute"></span> Minutes
-	<a href="https://www.w3schools.com/js/DEFAULT.asp" target="_blank"><span class="seconds" id="second"></span> Seconds</a>
+<div>
+  <label for="deadline">Set Deadline:</label>
+  <input type="datetime-local" id="deadline" />
+  <button onclick="setTimer()">Set Timer</button>
+</div>
+
+<br />
+
+<span class="days" id="day"></span> Days
+<span class="hours" id="hour"></span> Hours
+<span class="minutes" id="minute"></span> Minutes
+<span class="seconds" id="second"></span> Seconds
 
 <p id="demo"></p>
 
