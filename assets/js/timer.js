@@ -1,8 +1,6 @@
-/**************/
-/* Live Timer */
-/**************/
-var deadline = localStorage.getItem("deadline");
 var x = null;
+var deadline = null;
+var elapsedTime = null;
 
 function setTimer() {
   var inputDeadline = new Date(document.getElementById("deadline").value).getTime();
@@ -11,8 +9,27 @@ function setTimer() {
     return;
   }
 
-  deadline = inputDeadline;
+  var storedDeadline = localStorage.getItem("deadline");
+  var storedElapsedTime = localStorage.getItem("elapsedTime");
+
+  if (storedDeadline) {
+    deadline = parseInt(storedDeadline, 10);
+    elapsedTime = parseInt(storedElapsedTime, 10);
+  } else {
+    deadline = inputDeadline;
+    elapsedTime = 0;
+  }
+
+  var currentTime = new Date().getTime();
+  var timeElapsedSinceDeadline = currentTime - (deadline + elapsedTime);
+
+  if (timeElapsedSinceDeadline > 0) {
+    deadline += timeElapsedSinceDeadline;
+    elapsedTime += timeElapsedSinceDeadline;
+  }
+
   localStorage.setItem("deadline", deadline);
+  localStorage.setItem("elapsedTime", elapsedTime);
 
   clearInterval(x);
   x = setInterval(function() {
@@ -33,6 +50,28 @@ function setTimer() {
       document.getElementById("hour").innerHTML = '0';
       document.getElementById("minute").innerHTML = '0';
       document.getElementById("second").innerHTML = '0';
+      localStorage.removeItem("deadline");
+      localStorage.removeItem("elapsedTime");
     }
   }, 1000);
+}
+
+function updateTimer() {
+  clearInterval(x);
+  localStorage.removeItem("deadline");
+  localStorage.removeItem("elapsedTime");
+  setTimer();
+}
+
+window.onload = function() {
+  var storedDeadline = localStorage.getItem("deadline");
+  if (storedDeadline) {
+    deadline = parseInt(storedDeadline, 10);
+    document.getElementById("deadline").value = new Date(deadline).toISOString().substring(0, 16);
+    setTimer();
+  }
+  
+  document.getElementById("deadline").addEventListener("change", function() {
+    updateTimer();
+  });
 }
